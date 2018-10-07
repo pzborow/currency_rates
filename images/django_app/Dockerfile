@@ -12,11 +12,6 @@ RUN apt-get clean && \
     apt-get -q -y update
 
 
-#### Required system libraries ####
-RUN apt-get -q -y update && \
-    apt-get install -q -y postgresql-client-common postgresql-client-9.4
-
-
 ####  Locales  ####
 # based on https://github.com/2xyo/docker-debian-locales/blob/master/conf/locale.gen
 RUN apt-get install -q -y apt-utils && \

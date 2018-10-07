@@ -1,7 +1,5 @@
  version: '2'
  services:
-   db:
-     image: postgres
    web:
      build: images/django_app
      command: runserver
@@ -9,5 +7,3 @@
        - ./services/django_app:/srv
      ports:
        - "8000:8000"
-     depends_on:
-       - db

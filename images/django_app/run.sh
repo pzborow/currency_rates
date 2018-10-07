@@ -11,6 +11,7 @@ help () {
 
 runserver () {
     migrate
+    update_currency_rates
     echo "Running developer server"
     cd /srv
     exec ./manage.py runserver 0:8000
@@ -31,10 +32,10 @@ migrate() {
 }
 
 
-runtest() {
-    echo "Run tests"
+update_currency_rates() {
+    echo "Update currencies"
     cd /srv
-    ./manage.py test
+    ./manage.py update_currency_rates
 }
 
 
