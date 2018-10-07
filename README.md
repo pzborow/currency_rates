@@ -13,7 +13,7 @@ The only requirement is: read RSS with currency rates, store in database and pre
 specification how currency rates should be accessed by API, are history of currency rates are needed.
 
 Taking into account the above assumptions, implementation is as simple as possible.
-- Take PLN as base currency
+- Take EUR as base currency
 - Store only rates to base currency
 - Keep in DB only the freshest rates (no history)
 
