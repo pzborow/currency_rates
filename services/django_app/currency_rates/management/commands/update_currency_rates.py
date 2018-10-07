@@ -41,12 +41,10 @@ class Command(BaseCommand):
     def process_entry(entry):
         # use temporary without timezone field updated_parsed
         date_st = entry['updated_parsed']
-        # date_str = feed['entries'][0]['updated'] doesn't work because of
+        # TODO use datetime with timezone
+        # field 'updated' doesn't work because of
         # ValueError: time data '2018-10-05T14:15:00+01:00' does not match format '%Y-%m-%dT%H:%M:%S%z'
-        # this expect 2018-10-05T14:15:00+0100
-        # date_str = feed['entries'][0]['updated']
-        # parsed_date = timezone.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S%z")
-        # TODO fixme
+        # parsed_date = timezone.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S%z") expect 2018-10-05T14:15:00+0100
         date = datetime.fromtimestamp(mktime(date_st))
         target_currency = entry['cb_targetcurrency']
         # TODO this key looks like 'cb_exchangerate': '4.3045\nEUR', ensure if this is right field, if so, add validation
@@ -68,7 +66,7 @@ class Command(BaseCommand):
         self.process_entry(newest_entry)
 
     def handle(self, *args, **options):
-        # TODO Interested currencies, get from settings or try to read all RSS sources from site
+        # TODO considered currencies get from settings or try to read all RSS sources from site
         currencies = ['pln', 'usd']
         for currency in currencies:
             self.process_feed(currency)

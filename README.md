@@ -10,9 +10,10 @@ django, sqlite and docker
 
 Time restriction. No more than 3 hours for coding.
 The only requirement is: read RSS with currency rates, store in database and present ones in one API endpoint. In particular there are no
-specification how currency rates should be accessed by API, are history of currency rates are needed.
+specification how currency rates should be accessed by API, are history of currency rates needed.
 
 Taking into account the above assumptions, implementation is as simple as possible.
+
 - Keep in DB only the freshest rates (no history)
 - No environment stuff like Celery task, no retrying, no tests, docstrings, only reader draft contained in manage command
 - Use sqlite
@@ -23,10 +24,9 @@ Taking into account the above assumptions, implementation is as simple as possib
 - Keep history of currency rates
 - Estimate lack of currency rates using some regression (f.e. if some days are missing)
 - Wrap reading script into Celery task, allowing retrying
-- Expose more useful endpoint, f.e. allowing specify date
-- Use Django Rest Framework
+- Expose more useful endpoint, f.e. allowing to specify date
 - Make currencies as a table based on ISO 4217, use Foreign Key in currency rates table
-- Add tests
+- Add tests, doctstring
 - Use other database engine like Postgres
 
 
@@ -39,15 +39,12 @@ To startup project simple execute (you should have installed docker and docker-c
     :::bash
     cd currency_rates
     docker-compose up
+This command start database, django application and migrate data.
+
+Open browse and navigate to `http://localhost:8000/api/currency-rates/` to view currency rates as JSON for base currency EUR and
+two target currencies with rate and date.
 
 You can update currency rate with command
 
     :::bash
     docker-compose run --rm web update_currency_rate
-
-This command start database, django application and migrate data.
-
-You may also run tests
-
-    :::bash
-    docker-compose run web runtest
