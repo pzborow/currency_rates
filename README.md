@@ -5,6 +5,9 @@
 This project shows simple reading currency rates from RSS source, store it to DB and expose one endpoint to present ones. Uses python,
 django, sqlite and docker
 
+It was written as a recruitment task. I gave myself a fixed amount of time for it and did as much as I could
+within that time; the task brief is in `brief/`.
+
 
 ## Assumptions for the project
 
